@@ -1,0 +1,294 @@
+:root{
+    --main-body-bg-color: rgb(39, 48, 57);
+    --main-bg-color-dark:  #8C271E;
+    --main-bg-color-light: #fcfcfa;
+    --main-txt-color: white;
+    --main-txt-color-grey: #979ba0; 
+    --main-logo-color-red: rgb(223, 1, 25);
+}
+
+body{
+    background-color: var(--main-body-bg-color);
+}
+
+.header-navbar{
+    background-color:  var(--main-bg-color-light);
+}
+
+.nav-link {
+    color: var(--main-txt-color-grey);
+}
+.nav-link:hover{
+    color: var(--main-bg-color-dark) !important;
+    transition-duration: 0.4s;
+}
+.navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show > .nav-link {
+    color: darkred !important;
+} 
+
+.formBackground{
+    background-color: var(--main-bg-color-light);
+    margin-top: 180px;
+    padding: 70px;
+    border: solid 1px var(--main-txt-color-grey);
+    border-radius: 5px; 
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) ;
+    -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) ;
+    box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) ;
+
+}
+
+.formHeader{
+    text-align: center;
+    color: var(--main-body-bg-color);
+    padding: 8px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+.form-group , .form-control{
+    text-align: left;
+}
+
+.button-login{
+    float: right;
+    width: 48%;
+    background-color: var(--main-body-bg-color);
+    color: var(--main-bg-color-light);
+    border: solid 1px var(--main-body-bg-color);
+}
+.button-login:hover{
+    background-color: var(--main-bg-color-light);
+    color: var(--main-body-bg-color);
+    border: solid 1px var(--main-body-bg-color);
+}
+
+.button-reset{
+    float: left;
+    width: 48%;
+    background-color: var(--main-bg-color-dark);
+    color: var(--main-bg-color-light);
+
+}
+.button-reset:hover{
+    background-color: var(--main-bg-color-light);
+    color: var(--main-bg-color-dark);
+    border: solid 1px var(--main-bg-color-dark);
+}
+
+
+.user, .logOut, .logIn {
+    color: var(--main-txt-color-grey);
+}
+.user:hover, .logOut:hover, .logIn:hover{
+    color: var(--main-bg-color-dark);
+    text-decoration: none;
+    transition-duration: 0.3s;
+}
+
+.modal-title{
+    text-align: right;
+    color: var(--main-bg-color-dark);
+}
+.modal-header, .modal-body{
+    text-align: right !important;
+    float: right;
+}
+.modal-header .close{
+    margin-top: -1rem;
+    margin-left: -1rem;
+    float: left;
+}
+
+.content{
+    min-height: calc(100vh - 70px);
+}
+
+/* product.html için gerekli olan kodlar */
+
+.productHeader{
+    margin-top: 90px;
+    margin-bottom: 0px;
+    float: right;
+    text-align: end;
+}
+
+.jumbotron{
+    background-color: var(--main-body-bg-color);
+    padding: 20px !important;
+}
+.jumbotron h4{
+    font-size: 35px;
+    color: var(--main-bg-color-light);
+}
+.jumbotron p{
+    font-size: 16px;
+    color: var(--main-bg-color-light);
+}
+
+.productBody{
+    color: var(--main-body-bg-color);
+    background-color:var(--main-bg-color-light);
+    margin-top: 5px;
+    padding: 50px;
+}
+
+.product-nav{
+    color: var(--main-body-bg-color);
+    background-color: var(--main-bg-color-light);
+}
+.product-nav:hover{
+    color: var(--main-bg-color-dark) !important;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {    
+    color: var(--main-bg-color-light);
+    background-color: var(--main-body-bg-color);
+}
+.nav-tabs .nav-item.show .nav-link:hover, .nav-tabs .nav-link.active:hover {    
+    color: var(--main-bg-color-light) !important;
+}
+
+
+/* Formlarda İngilizce ve Türkçe dilleri için "form-group" ve "form-control" classlarından yazım konumu değiştirildi.*/
+/* Arapça için olan özellik login-page.css sınıfında tanımlanmıştı.*/
+.tr , .en{
+    float: left;
+    text-align: left;
+}
+.ar{
+    float: right;
+    text-align: right;
+}
+.button-add , .button-update{
+    width: 32%;
+    color: var(--main-bg-color-light);
+    background-color: var(--main-body-bg-color);
+}
+.button-add:hover, .button-update:hover, .button-add:focus, .button-update:focus{
+    color: var(--main-body-bg-color);
+    background-color: var(--main-bg-color-light);
+    border: solid 1px var(--main-body-bg-color);
+}
+.button-delete{
+    width: 32%;
+    color: var(--main-txt-color);
+    background-color: var(--main-bg-color-dark); 
+}
+.button-delete:hover , .button-delete:focus{
+    color: var(--main-bg-color-dark);
+    background-color: var(--main-txt-color);
+    border: solid 1px var(--main-bg-color-dark);
+}
+
+.custom-file-label{
+    text-align: left;
+}
+
+.kapak-image{
+    display: block;
+    margin-left: 2px;
+    padding: 2px;
+    max-width: 225px;
+    max-height: 125px;
+    object-fit: scale-down;
+}
+
+.image-product{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 550px;
+    max-height: 250px;
+    object-fit: scale-down;
+}
+
+.carousel-button{
+    margin-bottom: 0 !important;
+    border: solid 1px var(--main-bg-color-dark);
+    color: var(--main-bg-color-dark);
+    background-color: var(--main-bg-color-light); 
+}
+.carousel-caption{
+    bottom: 0px;
+}
+.carousel-button:hover, .carousel-button:focus{
+    color: var(--main-bg-color-light);
+    background-color: var(--main-bg-color-dark);
+}
+
+.carousel-control-next-icon, .carousel-control-prev-icon {
+    background-color: rgb(39, 48, 57, 0.6);
+}
+
+
+/* tablo.html için gerekli olan kodlar */
+.table-nav{
+    margin-top: 120px;
+    margin-bottom: 80px;
+    border-bottom: solid 1px var(--main-txt-color-grey); 
+}
+
+.navs-style{
+    color: var(--main-bg-color-light) !important;
+    transition-duration: 0.3s;
+}
+.navs-style:hover, .navs-style:focus{
+    background-color: var(--main-bg-color-light);
+}
+
+.input-search{
+    display: block;
+    margin-right: auto;
+    width: 200px;
+    max-width: 100%;
+}
+.input-search:hover, .input-search:focus, .input-search:active {
+    border-color: var(--main-bg-color-dark);
+    box-shadow: 0px 0px 0px white;
+    
+}
+.button-search{
+    color: var(--main-body-bg-color);
+    background-color: var(--main-bg-color-light);
+    border-color: var(--main-txt-color-grey) !important;
+    display: inline;
+    margin-left: auto;
+}
+.button-search:hover, .button-search:focus{
+    color: var(--main-bg-color-dark);
+    background-color: var(--main-bg-color-light);
+    border-color: var(--main-bg-color-dark) !important;
+}
+
+.table-style{
+    background-color: var(--main-bg-color-light);
+    color: var(--main-body-bg-color);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.table-style-body tr:hover{
+    color: var(--main-bg-color-dark) !important;
+}
+
+.delete-btn-style{
+    color: var(--main-bg-color-light);
+    background-color: var(--main-bg-color-dark);
+}
+.delete-btn-style:hover , .delete-btn-style:focus{
+    color: var(--main-bg-color-dark);
+    background-color: var(--main-bg-color-light);
+    border-color: var(--main-bg-color-dark) !important;
+}
+
+.button-style:hover , .button-style:focus{
+    color: var(--main-body-bg-color);
+    background-color: var(--main-bg-color-light); 
+}
+
+.product-img{
+    background-color: white;
+    height: 35px;
+    width: 35px;
+}
+    

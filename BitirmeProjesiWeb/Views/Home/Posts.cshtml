@@ -1,0 +1,70 @@
+﻿@model BitirmeProjesiWeb.ViewModels.Home.PostsViewModel
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
+@{
+    var sideMsg = string.Empty;
+    if(Model.Posts.Any())
+    {
+        sideMsg = Model.Posts[0].SubCategory.Name;
+        ViewData["Title"] = sideMsg;
+        ViewData["MetaDescription"] = sideMsg + " - " + Model.Posts[0].SubCategory.Category.Name;
+        ViewData["MetaKeywords"] = string.Join(", ", Model.Posts.Select(p => p.Title));
+    }
+    else
+    {
+        sideMsg = localizer["NoContent"].Value;
+        ViewData["Title"] = sideMsg;
+        ViewData["MetaDescription"] = sideMsg;
+        ViewData["MetaKeywords"] = sideMsg;
+    }
+}
+
+<!-- Post Preview Header Container Start -->
+<div class="container-fluid text-center text-md-center content-style mt-4">
+    <div class="row mt-4 pt-4">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-5">
+
+            @if (sideMsg != localizer["NoContent"].Value)
+            {
+                <h1 id="technology" class="header-technology pt-4" style="letter-spacing:normal">@localizer["Title"]</h1>
+                <hr class="mb-4">
+            }
+
+            <div class="list-group list-group-flush category-list-group pt-4">
+                @foreach (var post in Model.Posts)
+                {
+                    <a asp-action="PostDetails" asp-route-id="@post.Id" class="list-group-item  category-list-group-item list-group-item-action">
+                        <div class="media">
+                            <img src="~/images/@post.CoverPhotoPath" alt="@post.Title" class="align-self-center product-media-img mr-3" style="width:100px">
+                            <div class="media-body">
+                                <h5>@post.Title</h5>
+
+                                @if (post.Description.Length > 30)
+                                {
+                                    <p style="font-weight:lighter">
+                                        @post.Description.Substring(0, 30) ...
+                                    </p>
+                                }
+                                else
+                                {
+                                    <p style="font-weight:lighter">
+                                        @post.Description
+                                    </p>
+                                }
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
+
+        <div id="category-info-bg" class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-7">
+            <div class="category-info">
+                <h2 class="pb-4 content-header-anim ">@sideMsg</h2>
+            </div>
+        </div>
+
+    </div>
+    <br><br>
+</div>
+<!-- Post Preview Header Container End -->

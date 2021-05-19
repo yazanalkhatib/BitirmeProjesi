@@ -1,0 +1,33 @@
+﻿@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Giriş Sayfası";
+}
+
+<div class="container-fluid content">
+    <div class="row justify-content-md-center">
+        <div class="col-sm-3"></div>
+
+        <div class="col-sm-6 formBackground">
+            <form class="loginForm" asp-action="Login" asp-controller="Users" method="post" novalidate>
+                <h5 class="formHeader">Yönetim Bölümü</h5>
+                <hr>
+                <div class="form-group" >
+                    <label asp-for="Email">Email</label> <i class="fas fa-user"></i>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password">Şifre</label> <i class="fas fa-lock"></i>
+                    <input type="password" asp-for="Password" class="form-control">
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <hr>
+                <input type="submit" value="Giriş yap" class="btn btn-light button-login" />
+                <input type="reset" value="Temizle" class="btn btn-light button-reset" />
+            </form>
+        </div>
+
+        <div class="col-sm-3"></div>
+    </div>
+</div>

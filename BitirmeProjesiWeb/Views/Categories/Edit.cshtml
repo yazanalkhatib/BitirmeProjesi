@@ -1,0 +1,150 @@
+﻿@model BitirmeProjesiWeb.ViewModels.Categories.EditViewModel
+
+@{
+    ViewData["Title"] = "Kategori bilgileri düzeltme";
+}
+
+<!-- ---------- Başlık ---------- -->
+<div class="container-fluid content">
+    <div class="row justify-content-md-center">
+        <div class="col-sm-2"></div>
+
+        <div class="col-sm-8 productHeader">
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h4 class="display-4">Kategori bilgileri düzeltme</h4>
+                    <hr>
+                    <p class="lead">istenen bilgileri giriniz</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-2"></div>
+    </div>
+
+
+    <!-- ---------- İçerik ---------- -->
+    <div class="row justify-content-md-center">
+        <div class="col-lg-2"></div>
+
+        <div class="col-lg-8 productBody">
+
+            <!-- Navbar İle Dil seçeneği Mümkün -->
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link product-nav" data-toggle="tab" href="#turkce">Türkçe</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link product-nav" data-toggle="tab" href="#ingilizce">English</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link product-nav active" data-toggle="tab" href="#arapca">العربية</a>
+                </li>
+            </ul>
+            <hr />
+
+            <form name="EditForm" asp-action="Edit" method="post" enctype="multipart/form-data">
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div id="turkce" class="container tab-pane active">
+                        <!-- Türkçe Dil Seçeneği -->
+                        <div class="form-group en col-lg-12 m-2">
+                            <label asp-for="NameTr" class="control-label"></label>
+
+                            <input asp-for="NameTr" class="form-control en" />
+                            <span asp-validation-for="NameTr" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div id="ingilizce" class="container tab-pane fade">
+                        <!-- İngilizce Dil Seçeneği -->
+                        <div class="form-group en col-lg-12 m-2">
+                            <label asp-for="NameEn" class="control-label"></label>
+
+                            <input asp-for="NameEn" class="form-control en" />
+                            <span asp-validation-for="NameEn" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div id="arapca" class="container tab-pane fade">
+                        <!-- Arapça Dil Seçeneği -->
+                        <div class="form-group en col-lg-12 m-2">
+                            <label asp-for="NameAr" class="control-label ar"></label>
+
+                            <input asp-for="NameAr" class="form-control" dir="rtl" />
+                            <span asp-validation-for="NameAr" class="text-danger ar"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="form-row">
+                        <div class="form-group col-lg-4 mt-3">
+                            <img src="~/images/@Model.ExistingPhotoPath" class="kapak-image">
+                        </div>
+                        <!-- Kapak resmi olmayacağı zamanlarda sadece burayı kullan. "col-lg-12" yap. Buradan... -->
+                        <div class="form-group col-lg-8 mt-3 mr-0">
+
+                            <h6>Kapak fotoğrafı</h6>
+                            <hr />
+
+                            <div class="custom-file">
+                                <label class="custom-file-label">Kapak fotoğrafı değiştir</label>
+                                <input asp-for="Photo" class="custom-file-input" accept="image/*" />
+                                <span asp-validation-for="Photo" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <!-- ... buraya kadar -->
+                    </div>
+                </div>
+
+                <hr>
+
+                <button type="button" class="btn btn-light button-delete" data-toggle="modal" data-target="#deleteModal"><i class="far fa-arrow-alt-circle-right"></i> Vazgeç</button>
+                <button type="submit" class="btn btn-light button-add"><i class="fas fa-edit"></i> Kaydet</button>
+
+            </form>
+
+        </div>
+
+        <div class="col-lg-2"></div>
+
+    </div>
+
+</div>
+
+<!-- The Modal -->
+<div class="modal fade" id="deleteModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Vazgeç <i class="fa fa-sign-out" aria-hidden="true"></i></h4>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <p>Vazgeçten emin misiniz ?</p>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer" style="justify-content:normal">
+                <a class="btn btn-dark delete-btn-style" asp-action="Index">Evet <i class="fa fa-check" aria-hidden="true"></i></a>
+                <button type="button" class="btn btn-dark" data-dismiss="modal">Hayir <i class="fa fa-times" aria-hidden="true"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script>
+    $(".custom-file-input").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
+}

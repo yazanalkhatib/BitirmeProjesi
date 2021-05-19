@@ -1,0 +1,72 @@
+﻿@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+
+@inject IViewLocalizer Localizer
+@inject IOptions<RequestLocalizationOptions> LocOptions
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var cultureItems = LocOptions.Value.SupportedUICultures
+        .Select(c => new SelectListItem { Value = c.Name, Text = Localizer.GetString(c.Name) })
+        .ToList();
+    var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}{Context.Request.QueryString}";
+}
+
+@*<div title="@Localizer["Request culture provider:"] @requestCulture?.Provider?.GetType().Name">
+        <form id="selectLanguage"
+              asp-controller="Culture"
+              asp-action="SetCulture"
+              asp-route-returnUrl="@returnUrl"
+              method="post"
+              class="form-horizontal nav-link text-dark"
+              role="form">
+              <select class="form-control"
+                      name="culture"
+                      onchange="this.form.submit();"
+                      asp-for="@requestCulture.RequestCulture.UICulture.Name"
+                      asp-items="cultureItems">
+              </select>
+        </form>
+    </div>*@
+
+<div title="@Localizer["Request culture provider:"] @requestCulture?.Provider?.GetType().Name" class="nav-link dropdown my-1 mr-2 my-md-0">
+    <a class="nav-link btn btn-light btn-lg dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-globe"></i>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+        <h6 class="dropdown-header">@Localizer["SelectLanguage"]</h6>
+        <div class="dropdown-divider"></div>
+
+        <form id="selectLanguage"
+              asp-controller="Culture"
+              asp-action="SetCulture"
+              asp-route-returnUrl="@returnUrl"
+              method="post"
+              class="form-horizontal nav-link text-dark"
+              role="form">
+            <select class="form-control" hidden
+                    id="selElement"
+                    name="culture"
+                    onchange="this.form.submit();"
+                    asp-for="@requestCulture.RequestCulture.UICulture.Name"
+                    asp-items="cultureItems">
+            </select>
+
+            <a class="dropdown-item" href="#" onclick="invoke('0');">@Localizer["en"]</a>
+            <a class="dropdown-item" href="#" onclick="invoke('1');">@Localizer["tr"]</a>
+            <a class="dropdown-item" href="#" onclick="invoke('2');">@Localizer["ar"]</a>
+
+        </form>
+    </div>
+</div>
+
+
+<script>
+    function invoke(value) {
+        var element = document.getElementById('selElement');
+        element.selectedIndex = value;
+        var event = new Event('change');
+        element.dispatchEvent(event);
+    }
+</script>

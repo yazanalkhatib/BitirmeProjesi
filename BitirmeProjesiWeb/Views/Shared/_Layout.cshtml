@@ -1,0 +1,450 @@
+﻿@model BitirmeProjesiWeb.ViewModels.Home.BaseViewModel
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@using System.Threading;
+
+<!DOCTYPE html>
+<html lang="@Thread.CurrentThread.CurrentUICulture.Name">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="@ViewData["MetaDescription"]">
+    <meta name="keywords" content="@ViewData["MetaKeywords"]">
+
+    <title>@ViewData["Title"] - NEW COMPANY</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- Font Awesome -->
+    <link href="~/lib/fontawesome-free-5.14.0-web/css/all.css" rel="stylesheet" />
+
+    <link rel="shortcut icon" href="~/favicon.png"/>
+
+    <!-- Personal CSS -->
+    <link href="~/assets-client/css/client.css" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top header-navbar navbar-light" id="navbar">
+        <a class="navbar-brand" asp-action="Index">
+            <img src="~/assets/img/logo/ok.png" width="140" loading="lazy">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item mr-4 dropdown">
+                    <a class="nav-link btn btn-light btn-sm" asp-action="Index" role="button">
+                        @localizer["MainPageMenuItemTitle"]
+                    </a>
+                </li>
+                <li class="nav-item mr-4 dropdown">
+                    <a class="nav-link btn btn-light btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        @localizer["CategoriesMenuItemTitle"]
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        @foreach (var category in Model.Categories)
+                        {
+                            <button class="dropdown-item"
+                                    data-toggle="modal"
+                                    data-target="#category-modal-@category.Id">
+                                    @category.Name
+                            </button>
+                        }
+                    </div>
+                </li>
+                <li class="nav-item mr-4 dropdown">
+                    <a class="nav-link btn btn-light btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        @localizer["ProductsMenuItemTitle"]
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        @foreach (var product in Model.Products)
+                        {
+                            <a asp-controller="Home" asp-action="ProductDetails" asp-route-id="@product.Id" class="dropdown-item">@product.Name</a>
+                        }
+                    </div>
+                </li>
+                <li class="nav-item mr-4 dropdown">
+                    <a class="nav-link btn btn-light btn-sm" href="#partnersSection" role="button">
+                        @localizer["PartnersMenuItemTitle"]
+                    </a>
+                </li>
+            </ul>
+            <div class="nav-item dropdown my-1 mr-1 my-md-0">
+                <a class="nav-link btn btn-light btn-sm contact-button" asp-controller="Home" asp-action="Contact" role="button">
+                    @localizer["ContactUs"]
+                </a>
+            </div>
+            <div class="nav-link dropdown my-1 mr-2 my-md-0">
+                @await Html.PartialAsync("_CulturePartial")
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <main role="main" class="pb-3">
+            <!-- Sticky Side Social Bar -->
+            <div class="float-sm">
+                <div class="fl-fl float-fb">
+                    <i class="fab fa-facebook-f social-bar"></i>
+                    <a href="https://www.facebook.com/" target="_blank" style="letter-spacing:normal">@localizer["ContactUs"]</a>
+                </div>
+                <div class="fl-fl float-in">
+                    <i class="fab fa-instagram social-bar"></i>
+                    <a href="https://www.instagram.com/" target="_blank" style="letter-spacing:normal">@localizer["ContactUs"]</a>
+                </div>
+                <div class="fl-fl float-yt">
+                    <i class="fab fa-youtube social-bar"></i>
+                    <a href="https://www.youtube.com/" target="_blank" style="letter-spacing:normal">@localizer["ContactUs"]</a>
+                </div>
+                <div class="fl-fl float-wp">
+                    <i class="fab fa-whatsapp social-bar"></i>
+                    <a href="https://wa.me/905353253075" target="_blank">+90 535 325 30 75</a>
+                </div>
+                <div class="fl-fl float-phone">
+                    <i class="fas fa-phone social-bar"></i>
+                    <a target="_blank" href="tel:+905353253075">+90 535 325 30 75</a>
+                </div>
+                <div class="fl-fl float-mail">
+                    <i class="fas fa-envelope social-bar"></i>
+                    <a href="mailto:yazanalkhatib956@gmail.com" target="_blank">yazanalkhatib956@gmail.com</a>
+                </div>
+                <div class="fl-fl" style="top:470px">
+                    <i class="fab fa-linkedin-in social-bar"></i>
+                    <a href="https://www.linkedin.com/" target="_blank" style="letter-spacing:normal">@localizer["ContactUs"]</a>
+                </div>
+            </div>
+
+            <!-- Go Top Button -->
+            <div class="go-top">
+                <a href="#" class="btn btn-light go-top-btn" role="button"><i class="fas fa-arrow-up mr-2"></i></a>
+            </div>
+
+        </main>
+    </div>
+
+    @RenderBody()
+
+    <footer class="page-footer font-small">
+
+        <!-- Companies -->
+        <div id="partnersSection" class="container-fluid companies-footer text-center text-md-center">
+
+            <div class="row mt-4 d-flex mx-auto mt-4">
+                <div id="companyCarousel" class="carousel slide w-100" data-ride="carousel">
+                    <div class="carousel-inner w-100" role="listbox">
+
+                        @{
+                            bool isFirstPartner = true;
+                        }
+
+                        @foreach (var partner in Model.Partners)
+                        {
+                            if (isFirstPartner)
+                            {
+                                <div class="carousel-item companies-carousel active">
+                                    <div class="col-md-3">
+                                        <a class="card companies-card" href="http://www.@partner.WebsiteLink" target="_blank">
+                                            <img class="card-companies-img img-fluid" src="~/images/@partner.LogoPath">
+                                        </a>
+                                    </div>
+                                </div>
+
+                                isFirstPartner = false;
+                                continue;
+                            }
+
+                            <div class="carousel-item companies-carousel">
+                                <div class="col-md-3">
+                                    <a class="card companies-card" href="http://www.@partner.WebsiteLink" target="_blank">
+                                        <img class="card-companies-img img-fluid" src="~/images/@partner.LogoPath">
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <a class="carousel-control-prev w-auto" href="#companyCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next w-auto" href="#companyCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Communication -->
+        <div class="container-fluid communication-footer text-center text-md-center">
+            <div class="row mt-4 d-flex align-items-center">
+                <div class="col-md-12 col-lg-4 col-xl-4 mx-auto mb-4">
+                    <!-- Location -->
+                    <div class="location">
+                        <i class="fas fa-map-marked-alt mb-4"></i>
+                        <h4 class="text-uppercase font-weight-bold">@localizer["Company"]</h4>
+                        <hr class="footer-hr accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 80px;">
+                        <p class="communication-text">AKDENİZ/MERSİN</p>
+                        <p class="communication-link">
+                            <i class="fas fa-globe"></i>
+                            <a asp-action="Contact">@localizer["ClickHereForLocation"]</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-4 col-xl-4 mx-auto mb-4">
+                    <!-- Mail -->
+                    <div class="mail">
+                        <i class="fas fa-paper-plane mb-4"></i>
+                        <h4 class="text-uppercase font-weight-bold">@localizer["SalesContact"]</h4>
+                        <hr class="footer-hr accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 80px;">
+                        <p class="communication-text">@localizer["SalesContactDescription"]</p>
+                        <p class="communication-link">
+                            <i class="far fa-envelope"></i>
+                            <a href="mailto:yazanalkhatib956@gmail.com">yazanalkhatib956@gmail.com</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-4 col-xl-4 mx-auto mb-4">
+                    <!-- Support -->
+                    <div class="support">
+                        <i class="far fa-question-circle mb-4"></i>
+                        <h4 class="text-uppercase font-weight-bold">@localizer["AfterSalesSupport"]</h4>
+                        <hr class="footer-hr accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 80px;">
+                        <p class="communication-text">@localizer["SupportContactDescription"]</p>
+                        <p class="communication-link">
+                            <i class="fab fa-whatsapp"></i>
+                            <a href="https://wa.me/905353253075">+90 535 325 30 75</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Social Networks -->
+        <div class="container-fluid contact-footer">
+            <div class="row py-4 d-flex align-items-center">
+                <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+                    <p class="mb-0">@localizer["ContactUsViaSocialMedia"]</p>
+                </div>
+                <div class="col-md-6 col-lg-7 text-center text-md-right">
+                    <!-- Facebook -->
+                    <a class="social-networks" href="https://www.facebook.com/"><i class="fab fa-facebook-f mr-4"></i></a>
+                    <!--Instagram-->
+                    <a class="social-networks" href="https://www.instagram.com/"><i class="fab fa-instagram mr-4"></i></a>
+                    <!-- Whatsapp -->
+                    <a class="social-networks" href="https://wa.me/905353253075"><i class="fab fa-whatsapp mr-4"></i></a>
+                    <!-- Twitter -->
+                    <a class="social-networks" href="https://www.youtube.com"><i class="fab fa-youtube mr-4"></i></a>
+                    <!--Linkedin -->
+                    <a class="social-networks" href="https://www.linkedin.com/"><i class="fab fa-linkedin-in mr-4"></i></a>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Content Footer -->
+        <div class="container-fluid content-footer text-center text-md-left">
+            <div class="row mt-3">
+                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                    <h6 class="text-uppercase font-weight-bold">@localizer["Company"]</h6>
+                    <hr class="footer-hr accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>@localizer["About"]</p>
+                </div>
+
+                <!-- Technology and Product Content -->
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+
+                    <!-- Technology -->
+                    <h6 class="text-uppercase font-weight-bold">@localizer["CategoriesFooter"]</h6>
+                    <hr class="footer-hr accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+
+                    @foreach (var category in Model.Categories.TakeLast(6))
+                    {
+                        <p class="content-link">
+                            <a data-toggle="modal"
+                               href="#category-modal-@category.Id">@category.Name</a>
+                        </p>
+                    }
+
+                </div>
+
+                <!-- Products Content -->
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+
+                    <!-- Product -->
+                    <h6 class="text-uppercase font-weight-bold">@localizer["ProductsMenuItemTitle"]</h6>
+                    <hr class="footer-hr accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+
+                    @foreach (var product in Model.Products.TakeLast(6))
+                    {
+                        <p class="content-link">
+                            <a asp-controller="Home" asp-action="ProductDetails" asp-route-id="@product.Id">@product.Name</a>
+                        </p>
+                    }
+
+                </div>
+
+
+                <!-- Contact -->
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+
+                    <h6 class="text-uppercase font-weight-bold">@localizer["ContactFooter"]</h6>
+                    <hr class="footer-hr accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p><i class="fas fa-home mr-3"></i>AKDENİZ/MERSİN</p>
+                    <p><i class="fas fa-envelope mr-3"></i> yazanalkhatib956@gmail.com</p>
+                    <p><i class="fas fa-phone mr-3"></i> +90 535 325 30 75</p>
+                    <p><i class="fas fa-phone mr-3"></i> +90 535 325 30 75</p>
+                    <p><i class="fas fa-phone mr-3"></i> +90 535 325 30 75</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">NET &copy; @DateTime.Now.Year</div>
+
+    </footer>
+
+
+    <!-- Categories Modal -->
+    @foreach (var category in Model.Categories)
+    {
+        <div class="modal fade" id="category-modal-@category.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel" style="letter-spacing:normal">@category.Name</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="list-group modal-list-group">
+                            @foreach (var subCategory in category.SubCategories)
+                            {
+                                <a asp-action="Posts" asp-route-id="@subCategory.Id"
+                                   class="list-group-item  modal-list-group-item list-group-item-action">
+                                    @subCategory.Name
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        var prevScrollpos = window.pageYOffset;
+        window.onscroll = function () {
+            var currentScrollPos = window.pageYOffset;
+            if (prevScrollpos > currentScrollPos) {
+                document.getElementById("navbar").style.top = "0";
+            } else {
+                document.getElementById("navbar").style.top = "-80px";
+            }
+            prevScrollpos = currentScrollPos;
+        }
+
+
+        var companyScrollbar = document.querySelector('.company-scrollbar');
+        var ps = new PerfectScrollbar(companyScrollbar);
+
+        var scrollbarY = companyScrollbar.querySelector('.ps__rail-y');
+
+        companyScrollbar.onscroll = function () {
+            scrollbarY.style.cssText = `top: ${this.scrollTop}px!important; height: 400px; right: ${-this.scrollLeft}px`;
+        }
+
+    </script>
+
+    <script>
+
+        $('#recipeCarousel').carousel({
+            interval: 10000
+        })
+
+        $('.carousel .carousel-item.product-carousel').each(function () {
+            var minPerSlide = 3;
+            var next = $(this).next();
+            if (!next.length) {
+                next = $(this).siblings(':first');
+            }
+            next.children(':first-child').clone().appendTo($(this));
+
+            for (var i = 0; i < minPerSlide; i++) {
+                next = next.next();
+                if (!next.length) {
+                    next = $(this).siblings(':first');
+                }
+
+                next.children(':first-child').clone().appendTo($(this));
+            }
+        });
+
+
+
+        $('#companyCarousel').carousel({
+            interval: 10000
+        })
+
+        $('.carousel .carousel-item.companies-carousel').each(function () {
+            var minPerSlide = 4;
+            var next = $(this).next();
+            if (!next.length) {
+                next = $(this).siblings(':first');
+            }
+            next.children(':first-child').clone().appendTo($(this));
+
+            for (var i = 0; i < minPerSlide; i++) {
+                next = next.next();
+                if (!next.length) {
+                    next = $(this).siblings(':first');
+                }
+
+                next.children(':first-child').clone().appendTo($(this));
+            }
+        });
+
+
+
+        $('#certificateCarousel').carousel({
+            interval: 10000
+        })
+
+        $('.carousel .carousel-item.certificate-carousel').each(function () {
+            var minPerSlide = 3;
+            var next = $(this).next();
+            if (!next.length) {
+                next = $(this).siblings(':first');
+            }
+            next.children(':first-child').clone().appendTo($(this));
+
+            for (var i = 0; i < minPerSlide; i++) {
+                next = next.next();
+                if (!next.length) {
+                    next = $(this).siblings(':first');
+                }
+
+                next.children(':first-child').clone().appendTo($(this));
+            }
+        });
+
+
+
+    </script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

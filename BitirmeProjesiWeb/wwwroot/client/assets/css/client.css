@@ -1,0 +1,255 @@
+:root{
+    --main-body-bg-color: rgb(39, 48, 57);
+    --main-bg-color-dark:  rgb(140, 39, 30);
+    --main-bg-color-light: rgb(252, 252, 250);
+    --main-transparent-light: rgb(252, 252, 250, 0.8);
+    --main-transparent-dark: rgb(140, 39, 30, 0.8);
+    --main-txt-color: white;
+    --main-txt-color-grey: rgb(151, 155, 160); 
+    --main-logo-color-red: rgb(223, 1, 25);
+
+}
+
+body{
+    background-color: var(--main-bg-color-light);
+}
+
+/**** Navbar CSS Classes ****/
+.navbar{
+    background-color:  var(--main-transparent-light) !important;
+    -webkit-box-shadow: 0 8px 30px -6px var(--main-body-bg-color);
+    -moz-box-shadow: 0 8px 30px -6px var(--main-body-bg-color);
+    box-shadow: 0 8px 30px -6px var(--main-body-bg-color);
+}
+
+.navbar-brand{
+    margin-left: 40px;
+    margin-right: 50px;
+}
+
+.nav-link{
+    color: var(--main-body-bg-color) !important;
+    background-color: transparent;
+    border: 0px;
+}
+.nav-link:hover, .nav-link:focus, .nav-link:active{
+    color: var(--main-bg-color-dark) !important;
+    transition-duration: 0.4s;
+    background-color: transparent;
+}
+
+.show>.btn-light.dropdown-toggle{
+    color: var(--main-bg-color-dark) !important;
+    transition-duration: 0.4s;
+    background-color: transparent;
+}
+
+.dropdown-header{
+    color: var(--main-body-bg-color);
+    font-size: 18px;
+    font-weight: inherit;
+}
+.dropdown-menu{
+    background-color: var(--main-bg-color-light);
+}
+.dropdown-item{
+    color: var(--main-txt-color-grey);
+    font-size: 14px;
+}
+.dropdown-item:hover{
+    color: var(--main-bg-color-dark);
+    background-color: transparent;
+}
+.dropdown-conrent{
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    transition: all 1s ease-in;
+}
+
+.contact-button{
+    color: var(--main-bg-color-light) !important;
+    background-color: var(--main-bg-color-dark) !important;
+}
+.contact-button:hover{
+    color: var(--main-bg-color-dark) !important;
+    background-color: var(--main-transparent-light) !important;
+    border: solid 1px var(--main-bg-color-dark) !important;
+}
+
+
+/**** Carousel CSS Classes ****/
+.carousel-control-prev-icon, .carousel-control-next-icon {
+  height: 50px;
+  width: 50px;
+  background-color: var(--main-txt-color-grey);
+  background-size: 100%, 100%;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background-image: none;
+}
+.carousel-control-prev-icon:hover, .carousel-control-next-icon:hover{
+    background-color: var(--main-transparent-dark);
+    color: var(--main-bg-color-light);
+}
+.carousel-control-next-icon:after
+{
+  content: '>';
+  font-size: 28px;
+}
+
+.carousel-control-prev-icon:after {
+  content: '<';
+  font-size: 28px;
+}
+
+.carousel-caption{
+    color: var(--main-body-bg-color) !important;
+    text-align: left;
+    margin-bottom: 180px;
+}
+
+.carousel-anim{
+    position: relative;
+    animation: carousel-animation 2s;
+    animation-fill-mode: forwards;
+}
+@keyframes carousel-animation {
+    from {left: 0px;}
+    to {left: 35%;}
+  }
+
+.carosuel-caption-firstLine{
+    padding: 8px;
+    text-transform: uppercase;
+    color: var(--main-body-bg-color) !important;
+    background-color: rgb(252, 252, 250, 0.6);
+    font-weight: lighter;
+    font-size: 40px;
+}
+.carosuel-caption-secondLine{
+    padding: 8px;
+    text-transform: uppercase;
+    color: var(--main-body-bg-color);
+    background-color: rgb(252, 252, 250, 0.4);
+    font-weight: bolder;
+    font-size: 32px;
+}
+
+@media only screen and (max-width:1500px){
+    .carousel-caption{
+        padding-bottom: 8%; 
+    }
+}
+@media only screen and (max-width:1199px){
+    .corousel-caption h3{
+        font-size: 32px;
+    }
+    .carousel-caption p{
+        font-size: 18px;
+    }
+    .carousel-caption{
+        padding-bottom: 8%; 
+    }
+}
+@media only screen and (max-width:991px){
+    .carousel-caption p{
+        display: none;
+    }
+}
+@media only screen and (max-width:767px){
+    .corousel-caption h3{
+        font-size: 24px;
+    }
+    .carousel-caption{
+        padding-bottom: 6%; 
+    }
+}
+@media only screen and (max-width:575px){
+    #clientCarousel{
+        display: none;
+    }
+
+    #technology{
+        margin-top: 100px;
+    }
+}
+
+/**** Technology CSS Classes ****/
+#technology{
+    margin-top: 0px;
+    padding-top: 80px; 
+    padding-right: 40px;
+    padding-left: 40px; 
+}
+.header-technology{
+    text-align: center;
+    background-color: var(--main-bg-color-light);
+    color: var(--main-body-bg-color);
+}
+
+/**** Footer CSS Classes ****/
+footer{
+    background-color: var(--main-body-bg-color) !important;
+    color: var(--main-bg-color-light);
+}
+
+.go-home-footer{
+    padding-right: 100px;
+    padding-left: 100px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: var(--main-bg-color-light);
+}
+#go-home{
+    color: var(--main-bg-color-dark) !important;
+    text-decoration: none;
+}
+#go-home:hover{
+    color: var(--main-body-bg-color) !important;
+    transition-duration: 0.3s;
+}
+
+.contact-footer{
+    padding-right: 100px;
+    padding-left: 100px;
+    color: var(--main-bg-color-light);
+    background-color: rgb(62, 77, 91);  
+    border-bottom: 1px solid var(--main-body-bg-color);
+}
+.social-networks{
+    color: var(--main-bg-color-light);
+}
+.social-networks:hover{
+    color: var(--main-bg-color-dark);
+    transition-duration: 0.3s;
+}
+
+.content-footer{
+    padding-top: 10px;
+    padding-right: 100px;
+    padding-left: 100px; 
+    background-color: rgb(62, 77, 91);
+    color: var(--main-bg-color-light);
+}
+.content-link a{
+    text-decoration: none;
+    color: var(--main-txt-color-grey);
+}
+.content-link a:hover{
+    color: var(--main-bg-color-light);
+    transition-duration: 0.3s;
+}
+.help{
+    color: var(--main-bg-color-light);
+}
+.help:hover{
+    color: var(--main-bg-color-dark);
+    transition-duration: 0.3s;
+}
+hr{
+    border-top: 1px solid rgba(255,255,255);
+}
+
+.footer-copyright{
+    color: var(--main-txt-color-grey);
+    font-size: small;
+}

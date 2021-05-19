@@ -1,0 +1,161 @@
+﻿@inject BitirmeProjesiWeb.Utilities.ISecurity security
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" 
+          crossorigin="anonymous">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/lib/fontawesome-free-5.14.0-web/css/all.css" />
+
+    <!-- Personal CSS -->
+    <link rel="stylesheet" href="~/assets/css/login-page.css" />
+
+    <link rel="shortcut icon" href="~/favicon.png" />
+
+    <title>@ViewData["Title"] - New Company</title>
+</head>
+
+<body>
+
+    <header>
+
+        <nav class="navbar navbar-expand-lg fixed-top header-navbar navbar-light">
+            <a class="navbar-brand" asp-action="Index" asp-controller="Posts">
+                <img src="~/assets/img/logo/Logo.png" width="140" alt="" loading="lazy">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+
+                    @if (security.AuthorizeAdmin())
+                    {
+                        <li class="nav-item">
+                            <a id="userRolesLink" class="nav-link" asp-action="Index" asp-controller="UserRoles" onclick="changeactive('UserRoles')" style="font-size:20px; color:black">İş Pozisyonları</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="usersLink" class="nav-link" asp-action="Index" asp-controller="Users" onclick="changeactive('Users')" style="font-size:20px; color:black">Kullancılar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="certificatesLink" class="nav-link" asp-action="Index" asp-controller="Certificates" onclick="changeactive('Certificates')" style="font-size:20px; color:black">Sertifikalar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="partnersLink" class="nav-link" asp-action="Index" asp-controller="Partners" onclick="changeactive('Partners')" style="font-size:20px; color:black">Ortaklar</a>
+                        </li>
+                    }
+                    @if (security.Authenticate())
+                    {
+                        <li class="nav-item">
+                            <a id="categoriesLink" class="nav-link" asp-action="Index" asp-controller="Categories" onclick="changeactive('Categories')" style="font-size:20px; color:black">Ana kategori</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="subcategoriesLink" class="nav-link" asp-action="Index" asp-controller="SubCategories" onclick="changeactive('SubCategories')" style="font-size:20px; color:black">Alt Kategori</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="postsLink" class="nav-link" asp-action="Index" asp-controller="Posts" onclick="changeactive('Posts')" style="font-size:20px; color:black">Yayınlar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="productsLink" class="nav-link" asp-action="Index" asp-controller="Products" onclick="changeactive('Products')" style="font-size:20px; color:black">Projeler</a>
+                        </li>
+                    }
+
+                </ul>
+                @if (security.Authenticate())
+                {
+                    @*<div class="my-2 mr-4 my-lg-0">
+                        <span href="" class="user" style="font-size:20px; color:darkred">@security.UserFullName - المستخدم الحالي</span>
+                    </div>*@
+                    <div class="my-2 mr-4 my-lg-0">
+                        <a class="logOut" data-toggle="modal" href="#quitModal" style="font-size:20px; color:darkred"><i class="fas fa-sign-out-alt"></i> Çıkış</a>
+                    </div>
+                }
+                else
+                {
+                    <div class="my-2 mr-4 my-lg-0">
+                        <a class="logIn" asp-action="Login"><i class="fas fa-sign-in-alt" style="font-size:20px"></i> Giriş</a>
+                    </div>
+                }
+            </div>
+        </nav>
+
+    </header>
+
+    @if (security.Authenticate())
+    {
+        <!-- The Modal for Sign Out -->
+        <div class="modal fade" id="quitModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Çıkış <i class="fa fa-sign-out" aria-hidden="true"></i></h4>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <p>Hesabınızdan çıkış yapmaktan emin misiniz ?</p>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer" style="justify-content:normal">
+                        <a asp-controller="Users" asp-action="Logout" class="btn btn-dark delete-btn-style" style="color:white">Evet <i class="fa fa-check" aria-hidden="true"></i></a>
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">Hayir<i class="fa fa-times" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="container-fluid">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="my-3 pt-1 text-center text-small" style="color:#979ba0">
+        <p class="mb-0"> NET &copy; @DateTime.Now.Year</p>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+
+    <script>
+        function changeactive(pname) {
+            localStorage.setItem("activepage", pname);
+        }
+
+        $(function () {
+            $('.nav-link').removeClass('active');
+
+            var pname = localStorage.getItem("activepage");
+
+            switch (pname) {
+                case "Users": $('#usersLink').addClass('active'); break;
+                case "Categories": $('#categoriesLink').addClass('active'); break;
+                case "SubCategories": $('#subcategoriesLink').addClass('active'); break;
+                case "Posts": $('#postsLink').addClass('active'); break;
+                case "Products": $('#productsLink').addClass('active'); break;
+                case "UserRoles": $('#userRolesLink').addClass('active'); break;
+                case "Certificates": $('#certificatesLink').addClass('active'); break;
+                case "Partners": $('#partnersLink').addClass('active'); break;
+                default: $('#postsLink').addClass('active'); break;
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+﻿@model IEnumerable<BitirmeProjesiWeb.Models.Category>
+@inject BitirmeProjesiWeb.Utilities.ISecurity security
+
+@{
+    ViewData["Title"] = "Ana Kategori";
+    var isAdmin = security.AuthorizeAdmin();
+}
+
+<!-- ---------- Navs ---------- -->
+
+<div class="container-fluid content">
+
+    <div class="row justify-content-sm-center">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8 table-nav">
+            <ul class="nav nav-pills flex-column flex-xl-row nav-justified">
+                <li class="nav-item mx-2">
+                    <div class="flex-xl-fill text-md-center nav-link navs-style">
+                        <form class="form-inline" asp-action="Index">
+                            <button class="btn btn-outline-light btn-sm button-search" type="submit"><i class="fas fa-search"></i></button>
+                            <input class="form-control form-control-sm ml-md-1 input-search" name="searchString" type="search" placeholder="Ara" aria-label="Search" value="@ViewData["currentFilter"]" dir="rtl"/>
+                        </form>
+                    </div>
+                </li>
+                <li class="nav-item mx-2 pt-2">
+                    @if (isAdmin)
+                    {
+                    <a class="flex-xl-fill text-sm-center nav-link navs-style" asp-action="Create"><i class="fas fa-plus"></i> Yeni ana kategori ekle</a>
+                    }
+                </li>
+                <li class="nav-item mx-2 pt-2">
+                    <a class="flex-xl-fill text-sm-center nav-link navs-style" asp-action="Index">Bütün ana kategorileri göster</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+
+    <!-- ---------- Table ---------- -->
+
+    <div class="row justify-content-sm-center">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <table class="table table-hover table-style" dir="rtl">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NameAr)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NameEn)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NameTr)
+                        </th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody class="table-style-body">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NameAr)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NameEn)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NameTr)
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-md" dir="ltr">
+                                    @if (isAdmin)
+                                    {
+                                        <button type="button" class="btn btn-dark delete-btn-style" data-toggle="modal" data-target="#deleteModal-@item.Id" data-placement="bottom"><i class="fas fa-trash"></i></button>
+                                    }
+                                    <a class="btn btn-dark button-style mx-1" data-toggle="tooltip" data-placement="bottom" title="Düzelt" asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-edit"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            @if (isAdmin)
+            {
+                @foreach (var item in Model)
+                {
+                    <!-- The Modal for Delete User -->
+                    <div class="modal fade" id="deleteModal-@item.Id">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Kategori sil @item.NameAr<i class="fa fa-sign-out" aria-hidden="true"></i></h4>
+                                </div>
+
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <p>Kategori yi silmekten emin misiniz ?</p>
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer" style="justify-content:normal">
+                                    <a class="btn btn-dark delete-btn-style" asp-action="Delete" asp-route-id="@item.Id">Evet <i class="fa fa-check" aria-hidden="true"></i></a>
+                                    <button type="button" class="btn btn-dark" data-dismiss="modal">Hayir <i class="fa fa-times" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+
+}
