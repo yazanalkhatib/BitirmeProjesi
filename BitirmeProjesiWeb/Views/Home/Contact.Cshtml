@@ -1,0 +1,123 @@
+@model BitirmeProjesiWeb.ViewModels.Home.ContactViewModel
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
+@{
+    ViewData["Title"] = localizer["Title"];
+
+    ViewData["MetaDescription"] = localizer["About"];
+
+    ViewData["MetaKeywords"] = string.Join(", ", Model.Users.Select(u => u.UserRole.Name));
+}
+
+<style>
+    .label {
+        color: white;
+        padding: 8px;
+        margin: 8px;
+        border-radius: 10px 10px;
+    }
+    .success {
+        background-color: #4CAF50;
+    }
+    .danger {
+        color: red;
+    }
+</style>
+
+<div class="container-fluid">
+
+    <div class="row map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d204618.5006393485!2d34.388473578095805!3d36.74263264960746!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1527f4a4c0be6e9f%3A0x4dbef2b1f81e7d77!2sMersin%2C%20Akdeniz%2FMersin%2C%20Turkey!5e0!3m2!1sen!2sus!4v1613812180869!5m2!1sen!2sus"
+                width="100%" height="500" frameborder="0" style="border:0;" allowfullscreen=""
+                aria-hidden="false" tabindex="0"></iframe>
+    </div>
+
+    <div class="row contact-content">
+        <div class="col-md-6 contact-form">
+            <form asp-controller="Home" asp-action="Contact" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label for="name-surname">@localizer["FullName"]</label>
+                    <span asp-validation-for="Mail.SenderFullName" class="text-danger"></span>
+                    <input asp-for="Mail.SenderFullName" class="form-control contact-form-control">
+                </div>
+                <div class="form-group">
+                    <label for="phone">@localizer["Email"]</label>
+                    <span asp-validation-for="Mail.SenderFullName" class="text-danger"></span>
+                    <input asp-for="Mail.SenderEmailAddress" class="form-control contact-form-control">
+                </div>
+                <div class="form-group">
+                    <label for="message">@localizer["Message"]</label>
+                    <span asp-validation-for="Mail.SenderFullName" class="text-danger"></span>
+                    <textarea asp-for="Mail.Message" class="form-control contact-form-control" rows="3"></textarea>
+                </div>
+
+                @if (Model != null && Model.Mail != null && Model.Mail.Sent != null)
+                {
+                    if (Model.Mail.Sent == true)
+                    {
+                        <div>
+                            <label class="label success">@localizer["Sent"]</label>
+                        </div>
+                    }
+                    else
+                    {
+                        <div>
+                            <label class="label danger">@localizer["ErrorSendingMsg"]</label>
+                        </div>
+                    }
+                }
+
+                <button type="submit" class="btn btn-dark contact-form-btn">@localizer["Send"]</button>
+            </form>
+        </div>
+
+        <div class="col-md-6 contact-block">
+            <h1 class="mb-5">@localizer["DoYouHaveQuestion"]</h1>
+            <row>
+                <i class="fas fa-headset mr-2 contact-icon"></i>
+                <a target="_blank" href="tel:+905353253075" class="contact-block-link">+90 535 325 30 75</a>
+                <p class="mt-2 mb-6" style="font-size: 18px;">@localizer["CallUs"]</p>
+            </row>
+            <br>
+            <row>
+                <i class="fas fa-map-marker-alt mr-2 contact-icon"></i>
+                <a href="#" class="contact-block-link">AKDENİZ/MERSİN</a>
+                <p class="my-2" style="font-size: 18px;">@localizer["VisitUs"]</p>
+            </row>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Our Team Header Container Start -->
+
+<div class="container-fluid px-0 mx-0 text-center text-md-center mt-4 our-team-header">
+    <h1 style="letter-spacing:normal">@localizer["OurTeam"]</h1>
+</div>
+
+<!-- Our Team Header Container End-->
+<!-- Our Team Container Start -->
+
+<div class="container-fluid text-center text-md-center mt-4">
+    <div class="row">
+
+        @foreach (var user in Model.Users)
+        {
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+                <div class="card team-member-card">
+                    <i class="fas fa-user-circle fa-6x" style="color:rgb(140, 39, 30);"></i>
+                    <div class="card-body">
+                        <h5 class="card-title">@user.FullName</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@user.UserRole.Name</h6>
+                        <a href="mailto:@user.Email" class="card-text">@user.Email</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+<!-- Our Team Container End-->
