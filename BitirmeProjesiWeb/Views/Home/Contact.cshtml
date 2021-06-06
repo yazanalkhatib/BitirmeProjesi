@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = localizer["Title"];
 
-    ViewData["MetaDescription"] = localizer["AboutHamdanNet"];
+    ViewData["MetaDescription"] = localizer["About"];
 
     ViewData["MetaKeywords"] = string.Join(", ", Model.Users.Select(u => u.UserRole.Name));
 }
